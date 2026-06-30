@@ -3,6 +3,6 @@ const logger = require("./logger");
 
 const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, () => {
+app.listen(PORT, "0.0.0.0", () => {
   logger.info(`Starting demo-app on port ${PORT}`, { port: PORT });
 });

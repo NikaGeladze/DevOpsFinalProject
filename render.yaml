@@ -2,8 +2,8 @@ services:
   - type: web
     name: devops-final-project
     runtime: docker
-    dockerfilePath: ./app/Dockerfile
-    dockerContext: ./app
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
     plan: free
     branch: main
     healthCheckPath: /api/health
