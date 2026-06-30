@@ -87,14 +87,14 @@ jobs:
       - name: Lint Dockerfile (Hadolint)
         uses: hadolint/hadolint-action@v3.1.0
         with:
-          dockerfile: app/Dockerfile
+          dockerfile: Dockerfile
           failure-threshold: warning
 
       - name: Build container image
-        run: docker build -t demo-app:ci ./app
+        run: docker build -t demo-app:ci .
 
       - name: Scan container image (Trivy)
-        uses: aquasecurity/trivy-action@0.28.0
+        uses: aquasecurity/trivy-action@v0.36.0
         with:
           image-ref: demo-app:ci
           format: table
@@ -103,7 +103,7 @@ jobs:
           ignore-unfixed: true
 
       - name: Filesystem vulnerability scan (Trivy)
-        uses: aquasecurity/trivy-action@0.28.0
+        uses: aquasecurity/trivy-action@v0.36.0
         with:
           scan-type: fs
           scan-ref: .
