@@ -1,0 +1,7 @@
+# Trivy config — production dependency scan only (dev tools excluded)
+scan:
+  include-dev-deps: false
+  skip-dirs:
+    - node_modules
+    - coverage
+    - .git
