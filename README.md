@@ -5,6 +5,7 @@ Unified DevOps capstone combining **CI/CD**, **Infrastructure as Code**, **Blue-
 **Repository:** [https://github.com/NikaGeladze/DevOpsFinalProject](https://github.com/NikaGeladze/DevOpsFinalProject)
 
 **Prior work integrated:**
+
 - [ci-cd-app](https://github.com/NikaGeladze/ci-cd-app) — GitHub Actions CI/CD + Render deployment
 - [DevOpsMidterm](https://github.com/NikaGeladze/DevOpsMidterm) — Web app, IaC, blue-green, health checks
 - [observability-lab](https://github.com/NikaGeladze/observability-lab) — Prometheus, Grafana, Loki, alerting
@@ -20,18 +21,19 @@ cd DevOpsFinalProject
 ```
 
 This script:
+
 1. Creates `.env` from `.env.example`
 2. Installs Node.js dependencies (if Node is available)
 3. Starts the full Docker Compose stack (app + observability)
 4. Runs automated environment validation
 
-| Service | URL | Credentials |
-|---------|-----|-------------|
-| Demo App | http://localhost:5000 | — |
-| Prometheus | http://localhost:9090 | — |
-| Grafana | http://localhost:3000 | admin / admin123 |
-| Alertmanager | http://localhost:9093 | — |
-| Loki | http://localhost:3100 | — |
+| Service      | URL                   | Credentials      |
+| ------------ | --------------------- | ---------------- |
+| Demo App     | http://localhost:5000 | —                |
+| Prometheus   | http://localhost:9090 | —                |
+| Grafana      | http://localhost:3000 | admin / admin123 |
+| Alertmanager | http://localhost:9093 | —                |
+| Loki         | http://localhost:3100 | —                |
 
 ---
 
@@ -72,22 +74,22 @@ This script:
 
 ## Tech Stack
 
-| Tool | Purpose |
-|------|---------|
-| Node.js + Express | Web application |
-| Jest + Supertest | Unit tests |
-| ESLint | Code linting |
-| Docker + Docker Compose | Containerization & local stack |
-| GitHub Actions | CI/CD pipeline |
-| Render | Cloud deployment (free tier) |
-| Prometheus | Metrics collection |
-| Grafana | Dashboards & visualization |
-| Loki + Promtail | Log aggregation |
-| Alertmanager | Alert routing |
-| Trivy | Container & filesystem vulnerability scanning |
-| Gitleaks | Secrets scanning |
-| Hadolint | Dockerfile linting |
-| Bash scripts | IaC, deploy, rollback, health checks |
+| Tool                    | Purpose                                       |
+| ----------------------- | --------------------------------------------- |
+| Node.js + Express       | Web application                               |
+| Jest + Supertest        | Unit tests                                    |
+| ESLint                  | Code linting                                  |
+| Docker + Docker Compose | Containerization & local stack                |
+| GitHub Actions          | CI/CD pipeline                                |
+| Render                  | Cloud deployment (free tier)                  |
+| Prometheus              | Metrics collection                            |
+| Grafana                 | Dashboards & visualization                    |
+| Loki + Promtail         | Log aggregation                               |
+| Alertmanager            | Alert routing                                 |
+| Trivy                   | Container & filesystem vulnerability scanning |
+| Gitleaks                | Secrets scanning                              |
+| Hadolint                | Dockerfile linting                            |
+| Bash scripts            | IaC, deploy, rollback, health checks          |
 
 ---
 
@@ -196,10 +198,10 @@ Push / Pull Request
 
 ### GitHub Secrets Required (Cloud Deploy)
 
-| Secret | Description |
-|--------|-------------|
-| `RENDER_DEPLOY_HOOK_URL` | Render deploy hook URL |
-| `PRODUCTION_URL` | Live app URL (e.g. `https://your-app.onrender.com`) |
+| Secret                   | Description                                         |
+| ------------------------ | --------------------------------------------------- |
+| `RENDER_DEPLOY_HOOK_URL` | Render deploy hook URL                              |
+| `PRODUCTION_URL`         | Live app URL (e.g. `https://your-app.onrender.com`) |
 
 ### Branches
 
@@ -229,15 +231,15 @@ See [docs/rollback-procedure.md](docs/rollback-procedure.md) for full rollback g
 
 ## Security Implementation
 
-| Check | Tool | Where |
-|-------|------|-------|
-| Dependency vulnerabilities | `npm audit` | CI pipeline |
-| Secrets in repo | Gitleaks | CI pipeline |
-| Dockerfile best practices | Hadolint | CI pipeline |
-| Container image CVEs | Trivy | CI pipeline |
-| Filesystem CVEs | Trivy FS | CI pipeline |
-| Compose validation | `docker compose config` | CI pipeline |
-| Secrets management | GitHub Actions secrets + `.env.example` | Never commit `.env` |
+| Check                      | Tool                                    | Where               |
+| -------------------------- | --------------------------------------- | ------------------- |
+| Dependency vulnerabilities | `npm audit`                             | CI pipeline         |
+| Secrets in repo            | Gitleaks                                | CI pipeline         |
+| Dockerfile best practices  | Hadolint                                | CI pipeline         |
+| Container image CVEs       | Trivy                                   | CI pipeline         |
+| Filesystem CVEs            | Trivy FS                                | CI pipeline         |
+| Compose validation         | `docker compose config`                 | CI pipeline         |
+| Secrets management         | GitHub Actions secrets + `.env.example` | Never commit `.env` |
 
 Configuration: [.gitleaks.toml](.gitleaks.toml), [app/Dockerfile](app/Dockerfile)
 
@@ -248,6 +250,7 @@ Configuration: [.gitleaks.toml](.gitleaks.toml), [app/Dockerfile](app/Dockerfile
 ### Metrics (Prometheus)
 
 Custom counters exposed at `/metrics`:
+
 - `app_requests_total{method, endpoint, status}`
 - `app_errors_total{endpoint}`
 - `app_request_duration_seconds{endpoint}`
@@ -270,12 +273,12 @@ Promtail ships Docker container logs to Loki. Filter in Grafana Explore: `{servi
 
 ### Alerting Rules
 
-| Alert | Severity | Condition |
-|-------|----------|-----------|
-| HighErrorRate | CRITICAL | > 5 errors/min |
-| ElevatedErrorRate | WARNING | > 2 errors/min |
-| DemoAppDown | CRITICAL | `up{job="demo-app"} == 0` |
-| HighRequestLatency | WARNING | p95 > 1s |
+| Alert              | Severity | Condition                 |
+| ------------------ | -------- | ------------------------- |
+| HighErrorRate      | CRITICAL | > 5 errors/min            |
+| ElevatedErrorRate  | WARNING  | > 2 errors/min            |
+| DemoAppDown        | CRITICAL | `up{job="demo-app"} == 0` |
+| HighRequestLatency | WARNING  | p95 > 1s                  |
 
 ### Trigger CRITICAL Alert
 
@@ -294,15 +297,15 @@ Promtail ships Docker container logs to Loki. Filter in Grafana Explore: `{servi
 
 ## Reliability Improvements
 
-| Improvement | Implementation |
-|-------------|----------------|
-| Service health monitoring | Docker healthchecks + `health_check.sh` |
-| Rollback procedure | `rollback.sh` + [docs/rollback-procedure.md](docs/rollback-procedure.md) |
-| Incident response | [docs/incident-response.md](docs/incident-response.md) |
-| SLO definitions | [docs/slo.md](docs/slo.md) |
-| Improved alerting | 4 Prometheus rules + Alertmanager routing |
-| Post-deploy verification | `post-deploy-check.sh` in CI |
-| Environment validation | `validate-env.sh` after setup |
+| Improvement               | Implementation                                                           |
+| ------------------------- | ------------------------------------------------------------------------ |
+| Service health monitoring | Docker healthchecks + `health_check.sh`                                  |
+| Rollback procedure        | `rollback.sh` + [docs/rollback-procedure.md](docs/rollback-procedure.md) |
+| Incident response         | [docs/incident-response.md](docs/incident-response.md)                   |
+| SLO definitions           | [docs/slo.md](docs/slo.md)                                               |
+| Improved alerting         | 4 Prometheus rules + Alertmanager routing                                |
+| Post-deploy verification  | `post-deploy-check.sh` in CI                                             |
+| Environment validation    | `validate-env.sh` after setup                                            |
 
 ---
 
@@ -451,9 +454,7 @@ Push to `dev` branch → verify lint + test + security jobs pass on GitHub Actio
 
 ## Live Application
 
-> **Cloud URL:** `https://YOUR-APP.onrender.com/api/health`
->
-> Update this after deploying to Render.
+> **Cloud URL:** `https://devopsfinalproject-yn3j.onrender.com`
 
 ---
 
