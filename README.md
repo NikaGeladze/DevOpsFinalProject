@@ -2,8 +2,6 @@
 
 Unified DevOps capstone combining **CI/CD**, **Infrastructure as Code**, **Blue-Green Deployment**, **Observability** (Prometheus, Grafana, Loki), **Security Automation**, and **Reliability** improvements from Assignments 1, Midterm, and Observability Lab.
 
-**Repository:** [https://github.com/NikaGeladze/DevOpsFinalProject](https://github.com/NikaGeladze/DevOpsFinalProject)
-
 **Prior work integrated:**
 
 - [ci-cd-app](https://github.com/NikaGeladze/ci-cd-app) — GitHub Actions CI/CD + Render deployment
@@ -317,70 +315,46 @@ Replace or add your own screenshots in `screenshots/` and reference them below.
 
 ![GitHub Actions CI/CD pipeline](screenshots/ci-pipeline.png)
 
-> **How to capture:** Push to `main` or open a PR → GitHub → Actions → open latest workflow run → screenshot all jobs (lint, security, deploy).
-
 ### 2. Security Scanning Results
 
 ![Security scanning in CI](screenshots/security-scan.png)
-
-> **How to capture:** Actions → open the "Security Scanning" job → screenshot Trivy, Gitleaks, npm audit steps.
 
 ### 3. Grafana Dashboard (Custom Metrics)
 
 ![Grafana dashboard](screenshots/obs-dashboard.png)
 
-> **How to capture:** http://localhost:3000 → Dashboards → Demo App → screenshot panels showing `app_requests_total` and error rate.
-
 ### 4. JSON Logs in Grafana (Loki)
 
 ![JSON logs in Grafana](screenshots/jsonlogs.png)
-
-> **How to capture:** Grafana → Explore → Loki → query `{service="demo-app"}` → screenshot filtered JSON logs.
 
 ### 5. Active Alert Rule
 
 ![Prometheus/Grafana alerting](screenshots/alert-rules.png)
 
-> **How to capture:** Run `./scripts/trigger-alert.sh` → screenshot http://localhost:9090/alerts showing `HighErrorRate` FIRING.
-
 ### 6. Running Application
 
 ![Running app](screenshots/RunningApp.png)
-
-> **How to capture:** http://localhost:5000/index.html → screenshot the web UI with greeting form.
 
 ### 7. Blue-Green Deployment
 
 ![Blue deployment](screenshots/blue.png)
 ![Green deployment](screenshots/green.png)
 
-> **How to capture:** Run `./scripts/deploy.sh blue` and `./scripts/deploy.sh green` → screenshot both ports in browser.
-
 ### 8. Rollback
 
 ![Rollback](screenshots/rollback.png)
-
-> **How to capture:** Run `./scripts/rollback.sh` → screenshot terminal output.
 
 ### 9. Health Check Logs
 
 ![Health check logs](screenshots/HealthCheck.png)
 
-> **How to capture:** Run `./scripts/health_check.sh` for 1–2 min → `cat logs/health.log` → screenshot.
-
 ### 10. Cloud Deployment (Render)
 
 ![Render deployment](screenshots/render-deploy.png)
 
-> **How to capture:** Render dashboard showing live service + GitHub Actions deploy job success.
-> **Placeholder:** Add `screenshots/render-deploy.png` after configuring Render.
-
 ### 11. Blocked Deployment (Failing Tests)
 
 ![Blocked deploy](screenshots/blocked-deploy.png)
-
-> **How to capture:** Push broken test intentionally → screenshot CI failing and deploy job skipped.
-> **Placeholder:** Add `screenshots/blocked-deploy.png`.
 
 ---
 
@@ -455,18 +429,6 @@ Push to `dev` branch → verify lint + test + security jobs pass on GitHub Actio
 ## Live Application
 
 > **Cloud URL:** `https://devopsfinalproject-yn3j.onrender.com`
-
----
-
-## Submission Checklist
-
-- [ ] GitHub repository link (public)
-- [ ] Updated README.md (this file)
-- [ ] All screenshots captured and placed in `screenshots/`
-- [ ] `./setup.sh` runs successfully on a clean machine
-- [ ] CI pipeline passes on `main`
-- [ ] Render deployment configured (optional but recommended for Assignment 1 CD)
-- [ ] Alert simulation demonstrated (`./scripts/trigger-alert.sh`)
 
 ---
 
