@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DevOps Final Project</title>
+    <style>
+      body {
+        font-family: system-ui, sans-serif;
+        max-width: 720px;
+        margin: 60px auto;
+        padding: 0 20px;
+        color: #1a1a2e;
+      }
+      h1 {
+        color: #0070f3;
+      }
+      input,
+      button {
+        padding: 10px;
+        font-size: 1rem;
+        margin-top: 8px;
+      }
+      button {
+        background: #0070f3;
+        color: white;
+        border: none;
+        cursor: pointer;
+        border-radius: 4px;
+      }
+      button:hover {
+        background: #005bb5;
+      }
+      #result {
+        margin-top: 20px;
+        padding: 14px;
+        background: #f0f4ff;
+        border-radius: 6px;
+        display: none;
+      }
+      .links {
+        margin-top: 32px;
+        padding: 16px;
+        background: #f8f9fa;
+        border-radius: 8px;
+      }
+      .links a {
+        display: block;
+        margin: 6px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>DevOps Final Project</h1>
+    <p>Unified web app with CI/CD, observability, and security automation.</p>
+
+    <h2>Greeting Form</h2>
+    <input type="text" id="nameInput" placeholder="Your name..." />
+    <br />
+    <button onclick="submitForm()">Submit</button>
+    <div id="result"></div>
+
+    <div class="links">
+      <strong>Quick links</strong>
+      <a href="/health" target="_blank">Health check</a>
+      <a href="/metrics" target="_blank">Prometheus metrics</a>
+      <a href="/user/1" target="_blank">Dynamic route (/user/:id)</a>
+    </div>
+
+    <script>
+      async function submitForm() {
+        const name = document.getElementById("nameInput").value;
+        const res = await fetch("/greet", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ name }),
+        });
+        const data = await res.json();
+        const resultDiv = document.getElementById("result");
+        resultDiv.style.display = "block";
+        resultDiv.textContent = data.message;
+      }
+    </script>
+  </body>
+</html>

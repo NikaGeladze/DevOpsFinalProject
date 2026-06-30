@@ -1,0 +1,39 @@
+groups:
+  - name: demo_app_alerts
+    interval: 30s
+    rules:
+      - alert: HighErrorRate
+        expr: rate(app_errors_total[1m]) * 60 > 5
+        for: 0m
+        labels:
+          severity: critical
+        annotations:
+          summary: "CRITICAL — High error rate on demo-app"
+          description: "Error rate is {{ printf \"%.2f\" $value }} errors/min (threshold: 5/min). Immediate attention required."
+
+      - alert: ElevatedErrorRate
+        expr: rate(app_errors_total[1m]) * 60 > 2
+        for: 1m
+        labels:
+          severity: warning
+        annotations:
+          summary: "WARNING — Elevated error rate on demo-app"
+          description: "Error rate is {{ printf \"%.2f\" $value }} errors/min (threshold: 2/min)."
+
+      - alert: DemoAppDown
+        expr: up{job="demo-app"} == 0
+        for: 30s
+        labels:
+          severity: critical
+        annotations:
+          summary: "CRITICAL — demo-app is DOWN"
+          description: "demo-app has been unreachable for more than 30 seconds."
+
+      - alert: HighRequestLatency
+        expr: histogram_quantile(0.95, rate(app_request_duration_seconds_bucket[5m])) > 1
+        for: 2m
+        labels:
+          severity: warning
+        annotations:
+          summary: "WARNING — High p95 latency on demo-app"
+          description: "95th percentile latency exceeds 1 second."

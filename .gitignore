@@ -1,0 +1,11 @@
+.env
+node_modules/
+app/node_modules/
+app/coverage/
+*.pid
+logs/
+blue/
+green/
+.DS_Store
+*.log
+npm-debug.log*

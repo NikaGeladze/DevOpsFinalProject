@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: devops-final-project
+    runtime: docker
+    dockerfilePath: ./app/Dockerfile
+    dockerContext: ./app
+    plan: free
+    branch: main
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: SERVICE_NAME
+        value: demo-app
+      - key: APP_VERSION
+        value: 1.0.0
